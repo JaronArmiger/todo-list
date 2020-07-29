@@ -10,3 +10,5 @@ todosManager.createTodo({description: "taco tuesday",
 						 dueDate: "5/3/21"});
 const defaultProject = projectsManager.getProjectByID(0);
 console.log(defaultProject.getArray());
+const arr = ["callin", "out", "mayday", "whak", "em"];
+domManipulation.populateDiv(arr, "p")

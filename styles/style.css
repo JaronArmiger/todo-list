@@ -5,9 +5,13 @@
 
 form {
   height: 0;
-  width: 300px;
+  width: 500px;
   background-color: blue;
   transition: height .5s;
+}
+
+form >* {
+ font-size: 2rem;
 }
 
 h1 {
@@ -33,6 +37,13 @@ h1 {
   font-size: 3rem;
   font-weight: 700;
   outline: 0;
+}
+
+#test-div {
+  border: 3px solid #BBB;
+  width: 500px;
+  height: 200px;
+  border-radius: .5rem;
 }
 
 .invert {

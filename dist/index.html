@@ -5,8 +5,22 @@
   </head>
   <body>
   	<h1>callin out mayday whakem</h1>
-	<button id="new-todo-btn">^</button>
-	<form id="new-todo-form"></form>
+	<button id="new-todo-btn" class="invert">^</button>
+	<form id="new-todo-form" class="expand">
+	  <input type="text" id="description-input">
+	  <input type="date" id="dueDate-input" name="dueDate">
+	  <select name="priority" id="priority-select">
+	  	<option value="5">5</option>
+	  	<option value="4">4</option>
+	  	<option value="3">3</option>
+	  	<option value="2">2</option>
+	  	<option value="1">1</option>
+	  </select>
+	  <select name="project" id="project-select"></select>
+	</form>
+	<div id="test-div">
+	  
+	</div>
   	<script src="main.js"></script>
   </body>
 </html>
