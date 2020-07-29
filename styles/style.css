@@ -4,7 +4,7 @@
 }
 
 form {
-  height: 0;
+  height: 300px;
   width: 500px;
   background-color: blue;
   transition: height .5s;
@@ -50,6 +50,10 @@ h1 {
   transform: rotate(180deg);
 }
 
-.expand {
-  height: 300px;
+.hide {
+  height: 0;
+}
+
+.hide > * {
+  display: none;
 }

@@ -6,7 +6,7 @@ const toggleForm = () => {
   newTodoButton.addEventListener('click', (e) => {
   	const btn = e.target;
   	btn.classList.toggle("invert");
-  	newTodoForm.classList.toggle("expand");
+  	newTodoForm.classList.toggle("hide");
   })
 }
 
