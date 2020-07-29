@@ -4,6 +4,7 @@ const newTodoButton = document.querySelector('#new-todo-btn');
 const newTodoForm = document.querySelector('#new-todo-form');
 const projectSelect = document.querySelector('#project-select');
 const dueDateInput = document.querySelector('#dueDate-input');
+const todoListDiv = document.querySelector('#todo-list');
 
 const toggleForm = () => {
   newTodoButton.addEventListener('click', (e) => {
@@ -32,9 +33,16 @@ const setDefaultDate = () => {
 
 const setUpForm = () => {
   setDefaultDate();
-  eventAggregator.subscribe("projectInfoSent", (projectList) => {
+  eventAggregator.subscribe("projectListSent", (projectList) => {
   	populateProjectSelect(projectList);
   });
+}
+
+const setUpTodoList = () => {
+  eventAggregator.subscribe("todoListSent", (todoList) => {
+  	console.log("setUpTodoList");
+  	populateTodoList(todoList);
+  })
 }
 
 const handleFormSubmit = (e) => {
@@ -42,13 +50,16 @@ const handleFormSubmit = (e) => {
   const form = e.target;
   const description = form["description-input"].value;
   const dueDate = form["dueDate-input"].value;
-  const priority = form["priority-select"].value;
-  console.log(description);
-  console.log(dueDate);
-  console.log(priority);
+  const priority = parseInt(form["priority-select"].value);
+  const projectID = parseInt(form["project-select"].value);
+  const todoInfo = {
+  	description, dueDate, priority, projectID
+  };
+  eventAggregator.publish("todoInfoSent", todoInfo);
 }
 
 const populateElement = (list, element, fn) => {
+  element.innerHTML = "";
   list.forEach(item => {
   	const child = fn(item);
   	element.appendChild(child);
@@ -57,6 +68,10 @@ const populateElement = (list, element, fn) => {
 
 const populateProjectSelect = (list) => {
  return populateElement(list, projectSelect, createProjectOption);
+}
+
+const populateTodoList = (list) => {
+  return populateElement(list, todoListDiv, createTodoLi);
 }
 
 const createProjectOption = (project) => {
@@ -68,12 +83,17 @@ const createProjectOption = (project) => {
   return option;
 }
 
-
+const createTodoLi = (todo) => {
+  const li = document.createElement('li');
+  li.textContent = todo.description;
+  return li;
+}
 
 const domManipulation = (() => {
   toggleForm();
   newTodoForm.addEventListener('submit', handleFormSubmit)
   setUpForm();
+  setUpTodoList();
   return {
     
   }

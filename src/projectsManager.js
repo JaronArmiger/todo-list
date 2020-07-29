@@ -26,7 +26,7 @@ const projectsManager = (() => {
   }
 
   const sendProjectList = () => {
-    eventAggregator.publish("projectInfoSent", projectsArray);
+    eventAggregator.publish("projectListSent", projectsArray);
   }
 
   const getArray = () => projectsArray;

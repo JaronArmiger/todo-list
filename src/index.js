@@ -5,11 +5,11 @@ import { domManipulation } from "./domManipulation";
 import { todosManager }    from "./todosManager";
 import { projectsManager } from "./projectsManager";
 import { eventAggregator } from "./eventAggregator";
-/*
+
 console.log(projectsManager.getArray());
 todosManager.createTodo({description: "taco tuesday",
 						 dueDate: "5/3/21"});
-
+/*
 projectsManager.createProject("bread");
 const defaultProject = projectsManager.getProjectByID(0);
 const projectsArray = projectsManager.getArray();
@@ -21,6 +21,7 @@ window.onload = (e) => {
 }
 */
 projectsManager.sendProjectList();
+todosManager.sendTodoList();
 console.log(todosManager.getArray());
 console.log(eventAggregator.getArray());
 
