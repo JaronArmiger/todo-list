@@ -53,16 +53,7 @@ const eventAggregator = (() => {
   }
 })();
 
-const testFn = (string) => {
-  console.log(string);
-}
-
-//const newEvent = event("pull");
-//console.log(newEvent);
-console.log(eventAggregator.getArray());
-eventAggregator.subscribe("newEvent", testFn);
-console.log(eventAggregator.getArray());
-eventAggregator.publish("newEvent", "fuck");
+export { eventAggregator }
 
 
 
