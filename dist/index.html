@@ -4,22 +4,40 @@
   	<title>Kingston Kingdom</title>
   </head>
   <body>
-  	<h1>callin out mayday whakem</h1>
-	<button id="new-todo-btn" class="invert">^</button>
-	<form id="new-todo-form" class="">
-	  <input type="text" id="description-input">
-	  <input type="date" id="dueDate-input" name="dueDate">
-	  <select name="priority" id="priority-select">
-	  	<option value="5">5</option>
-	  	<option value="4">4</option>
-	  	<option value="3">3</option>
-	  	<option value="2">2</option>
-	  	<option value="1">1</option>
-	  </select>
-	  <select name="project" id="project-select"></select>
-	  <input type="submit" value="+ add todo">
-	</form>
-	<div id="todo-list"></div>
+  	<div class="container">
+  	  <h1>callin out mayday whakem</h1>
+  	  <div id="todo-list"></div>
+  	  <div id="menu">
+  	  	<h2>Projects</h2>
+  	  	<ul id="project-list"></ul>
+  	  </div>
+  	  <div class="form-wrapper">
+  	  	<div id="dummy"></div>
+	    <button id="new-todo-btn" class="invert">^</button>
+	    <form id="new-todo-form" class="">
+	      <div class="form-control">
+	        <input type="text" id="description-input" placeholder="describe task...">
+	        <input type="date" id="dueDate-input" name="dueDate">
+	      </div>
+	      <div class="form-control">
+	      	<label for="priority-select">priority: </label>
+	        <select name="priority" id="priority-select">
+	  	      <option value="5">5</option>
+	  	      <option value="4">4</option>
+	  	      <option value="3">3</option>
+	  	      <option value="2">2</option>
+	  	      <option value="1">1</option>
+	        </select>
+	        <label for="project">project: </label>
+	        <select name="project" id="project-select"></select>
+	      </div>
+	      <div class="form-control">
+	        <input type="submit" value="+ add todo">
+	      </div>
+	    </form>
+	  </div>
+	  
+	</div>
   	<script src="main.js"></script>
   </body>
 </html>

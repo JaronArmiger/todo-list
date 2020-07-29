@@ -1,17 +1,18 @@
+:root {
+  --main-bg-color: rgba(209, 44, 115, 0.5);
+}
+
 * {
   font-family: Helvetica, sans-serif;
   font-size: 10px;
+  box-sizing: border-box;
 }
 
-form {
-  height: 300px;
-  width: 600px;
-  background-color: blue;
-  transition: height .5s;
-}
-
-form >* {
- font-size: 2rem;
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 h1 {
@@ -20,7 +21,70 @@ h1 {
  text-align: center;
 }
 
+h2 {
+  font-size: 2rem;
+}
+
+#menu {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 25rem;
+  padding: 3rem;
+  background-color: var(--main-bg-color); 
+}
+
+.form-wrapper {
+  position: relative;
+  width: 600px;
+}
+
+form {
+  max-width: 600px;
+  transition: all .5s;
+  border: 0;
+  background-color: var(--main-bg-color);
+  border-radius: 1rem;
+  padding: 2rem;
+  margin-top: .5rem;
+}
+
+form >* {
+ font-size: 2rem;
+ transition: all .5s;
+}
+
+.form-control {
+  width: 100%;
+  display: flex;
+}
+
+.form-control > * {
+  font-size: 2rem;
+  border: 0;
+  outline: 0;
+  margin: .5rem;
+  border-radius: .5rem;
+  padding: .5rem;
+}
+
+.form-control > label {
+  margin-right: 1rem;
+}
+
+.form-control > select, input {
+  flex: 1;
+}
+
+input[type="submit"] {
+  background-color: white;
+  cursor: pointer;
+}
+
 #new-todo-btn {
+  position: absolute;
+  left: 0;
   width: 4rem;
   height: 4rem;
   border: 0;
@@ -52,6 +116,8 @@ h1 {
 
 .hide {
   height: 0;
+  padding: 0;
+
 }
 
 .hide > * {

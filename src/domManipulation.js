@@ -11,6 +11,7 @@ const toggleForm = () => {
   	const btn = e.target;
   	btn.classList.toggle("invert");
   	newTodoForm.classList.toggle("hide");
+    newTodoForm.reset();
   })
 }
 
@@ -45,6 +46,8 @@ const setUpTodoList = () => {
   })
 }
 
+
+
 const handleFormSubmit = (e) => {
   e.preventDefault();
   const form = e.target;
@@ -56,6 +59,7 @@ const handleFormSubmit = (e) => {
   	description, dueDate, priority, projectID
   };
   eventAggregator.publish("newTodoInfoSent", todoInfo);
+  form.reset();
 }
 
 const populateElement = (list, element, fn) => {
