@@ -1,6 +1,9 @@
-import { todo }            from "./todo";
 import { projectsManager } from "./projectsManager";
 import { eventAggregator } from "./eventAggregator";
+
+const todo = ({description, dueDate, priority, id, projectID}) => ({
+  description, dueDate, priority, id, projectID, completed: false
+});
 
 const todosManager = (() => {
   let todosArray = [];
