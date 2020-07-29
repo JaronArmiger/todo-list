@@ -1,7 +1,6 @@
 const newTodoButton = document.querySelector('#new-todo-btn');
 const newTodoForm = document.querySelector('#new-todo-form');
 const projectSelect = document.querySelector('#project-select');
-const testDiv = document.querySelector('#test-div');
 
 const toggleForm = () => {
   newTodoButton.addEventListener('click', (e) => {
@@ -11,20 +10,31 @@ const toggleForm = () => {
   })
 }
 
-const populateElement = (element, list, tag) => {
+const populateElement = (list, element, fn) => {
   list.forEach(item => {
-  	const child = document.createElement(tag);
-  	child.textContent = item;
+  	const child = fn(item);
   	element.appendChild(child);
   })
 }
+
+const createProjectOption = (project) => {
+  const option = document.createElement('option');
+  option.setAttribute("value", project.id);
+
+  option["name"] = project.name;
+  option.textContent = project.name;
+  return option;
+}
+
+
+
 const domManipulation = (() => {
   toggleForm();
-  const populateDiv = (list,tag) => {
-  	return populateElement(testDiv,list,tag)
+  const populateProjectSelect = (list) => {
+  	return populateElement(list, projectSelect, createProjectOption);
   }
   return {
-  	populateDiv
+    populateProjectSelect
   }
 })();
 

@@ -8,7 +8,13 @@ import { projectsManager } from "./projectsManager";
 console.log(projectsManager.getArray());
 todosManager.createTodo({description: "taco tuesday",
 						 dueDate: "5/3/21"});
+
+projectsManager.createProject("bread");
 const defaultProject = projectsManager.getProjectByID(0);
-console.log(defaultProject.getArray());
-const arr = ["callin", "out", "mayday", "whak", "em"];
-domManipulation.populateDiv(arr, "p")
+const projectsArray = projectsManager.getArray();
+console.log(projectsArray);
+domManipulation.populateProjectSelect(projectsArray);
+
+window.onload = (e) => {
+  console.log("i said that")
+}
