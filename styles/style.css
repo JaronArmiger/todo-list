@@ -1,3 +1,44 @@
+* {
+  font-family: Helvetica, sans-serif;
+  font-size: 10px;
+}
+
+form {
+  height: 0;
+  width: 300px;
+  background-color: blue;
+  transition: height .5s;
+}
+
 h1 {
  color: blue;
+ font-size: 3rem;
+ text-align: center;
+}
+
+#new-todo-btn {
+  width: 4rem;
+  height: 4rem;
+  border: 0;
+  border-radius: 50%;
+  padding: 1rem;
+  background-color: #fc5203;
+  color: white;
+  text-align:center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: transform .6s;
+  font-size: 3rem;
+  font-weight: 700;
+  outline: 0;
+}
+
+.invert {
+  transform: rotate(180deg);
+}
+
+.expand {
+  height: 300px;
 }

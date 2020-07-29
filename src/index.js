@@ -1,7 +1,8 @@
 import "../styles/style.css";
 //import { todo }            from "./todo";
 //import { project }         from "./project";
-import { todosManager } from "./todosManager";
+import { domManipulation } from "./domManipulation"
+import { todosManager }    from "./todosManager";
 import { projectsManager } from "./projectsManager";
 
 console.log(projectsManager.getArray());
