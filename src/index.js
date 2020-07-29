@@ -6,11 +6,11 @@ import { todosManager }    from "./todosManager";
 import { projectsManager } from "./projectsManager";
 import { eventAggregator } from "./eventAggregator";
 
-console.log(projectsManager.getArray());
 todosManager.createTodo({description: "taco tuesday",
 						 dueDate: "5/3/21"});
-/*
+
 projectsManager.createProject("bread");
+/*
 const defaultProject = projectsManager.getProjectByID(0);
 const projectsArray = projectsManager.getArray();
 console.log(projectsArray);

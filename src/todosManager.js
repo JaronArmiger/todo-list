@@ -1,4 +1,3 @@
-import { projectsManager } from "./projectsManager";
 import { eventAggregator } from "./eventAggregator";
 
 const todo = ({description, dueDate, priority, id, projectID}) => ({
@@ -12,20 +11,22 @@ const todosManager = (() => {
   	const newTodo = todo({description,dueDate,
   							          priority,id: todosCounter,
                           projectID});
-  	if (newTodo && projectsManager.projectExists(projectID)) {  
+  	if (newTodo) {  
   	  todosCounter++;
   	  todosArray.push(newTodo);
-  	  projectsManager.addTodoToProject(projectID,newTodo.id);
+  	  eventAggregator.publish("todoSent", newTodo);
       sendTodoList();
   	  return newTodo;
   	} else {
       console.log("failed to create");
     }
   };
+
   const getTodoByID = (todoID) => {
   	return todosArray.find(t => t.id === todoID);
   }
-  eventAggregator.subscribe("todoInfoSent", (todoInfo) => {
+
+  eventAggregator.subscribe("newTodoInfoSent", (todoInfo) => {
     createTodo(todoInfo);
      console.log("post-creation");
      console.log(todosArray);

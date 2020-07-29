@@ -31,9 +31,10 @@ const projectsManager = (() => {
   	return projectsArray.find(p => p.id === projectID);
   }
   const addTodoToProject = (projectID, todoID) => {
-  	const theProject = getProjectByID(projectID);
-  	const theTodo = todosManager.getTodoByID(todoID);
-  	theProject.addTodo(theTodo);
+  	const theProject = getProjectByID(projectID) || createProject(`project-${projectsCounter}`);
+    eventAggregator.subscribe("todoSent", (todoObject) => {
+      theProject.addTodo(todoObject);
+    })
   }
 
   const sendProjectList = () => {

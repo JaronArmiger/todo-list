@@ -55,7 +55,7 @@ const handleFormSubmit = (e) => {
   const todoInfo = {
   	description, dueDate, priority, projectID
   };
-  eventAggregator.publish("todoInfoSent", todoInfo);
+  eventAggregator.publish("newTodoInfoSent", todoInfo);
 }
 
 const populateElement = (list, element, fn) => {
