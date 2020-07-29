@@ -25,15 +25,44 @@ const eventAggregator = (() => {
   let events = [];
 
   const getEvent = (eventName) => {
-  	return events.find()
+  	return events.find(event => event.name === eventName);
+  }
+
+  const publish = (eventName, eventArgs) => {
+  	let thisEvent = getEvent(eventName);
+  	if (!thisEvent) {
+  	  thisEvent = event(eventName);
+  	  events.push(thisEvent);
+  	}
+  	thisEvent.fire(eventArgs);
+  }
+
+  const subscribe = (eventName, handler) => {
+  	let thisEvent = getEvent(eventName);
+  	if (!thisEvent) {
+  	  thisEvent = event(eventName);
+  	  events.push(thisEvent);
+  	}
+
+  	thisEvent.addHandler(handler);
+  }
+
+  const getArray = () => events;
+  return {
+  	publish, subscribe, getArray
   }
 })();
 
-const newEvent = event("touch-road");
-newEvent.addHandler((string) => console.log(string));
-newEvent.fire("SWV");
+const testFn = (string) => {
+  console.log(string);
+}
 
-
+//const newEvent = event("pull");
+//console.log(newEvent);
+console.log(eventAggregator.getArray());
+eventAggregator.subscribe("newEvent", testFn);
+console.log(eventAggregator.getArray());
+eventAggregator.publish("newEvent", "fuck");
 
 
 
