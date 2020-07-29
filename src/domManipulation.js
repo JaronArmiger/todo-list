@@ -103,8 +103,9 @@ const createProjectOption = (project) => {
 
 const createProjectLi = (project) => {
   const li = document.createElement('li');
-  li.setAttribute('id', `project-${project.id}`)
-  li.textContent = project.name
+  li.setAttribute('id', `project-${project.id}`);
+  li.setAttribute('class', 'project-li')
+  li.textContent = project.name;
   return li;
 }
 

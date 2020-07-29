@@ -1,5 +1,6 @@
 :root {
   --main-bg-color: rgba(209, 44, 115, 0.5);
+  --main-darker: rgba(209, 44, 115, 0.9);
 }
 
 * {
@@ -23,6 +24,13 @@ h1 {
 
 h2 {
   font-size: 2rem;
+  margin: 0;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
 }
 
 #side-bar {
@@ -33,6 +41,21 @@ h2 {
   width: 25rem;
   padding: 3rem;
   background-color: var(--main-bg-color); 
+}
+
+.project-li {
+  font-size: 2rem;
+  padding: 1rem;
+  cursor: pointer;
+  border-radius: .5rem;
+}
+
+.project-li:hover {
+  background-color: var(--main-darker);
+}
+
+.active-project {
+  background-color: var(--main-darker);
 }
 
 .form-wrapper {
