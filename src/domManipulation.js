@@ -85,7 +85,12 @@ const createProjectOption = (project) => {
 
 const createTodoLi = (todo) => {
   const li = document.createElement('li');
-  li.textContent = todo.description;
+  li.innerHTML = `
+  				   <span>${todo.description}</span>
+  				   <span>${todo.projectID}</span>
+  				   <span>${todo.dueDate}</span>
+  				   <span>${todo.priority}</span>
+  				 `		
   return li;
 }
 
