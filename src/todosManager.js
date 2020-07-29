@@ -4,8 +4,8 @@ import { projectsManager } from "./projectsManager";
 const todosManager = (() => {
   let todosArray = [];
   let todosCounter = 0;
-  const createTodo = ({title,description,dueDate,priority=5,projectID=0}) => {
-  	const newTodo = todo({title,description,dueDate,
+  const createTodo = ({description,dueDate,priority=5,projectID=0}) => {
+  	const newTodo = todo({description,dueDate,
   							priority,id: todosCounter,projectID});
   	if (newTodo && projectsManager.projectExists(projectID)) {  
   	  todosCounter++;
