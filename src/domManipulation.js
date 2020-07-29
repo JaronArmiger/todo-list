@@ -5,6 +5,8 @@ const newTodoForm = document.querySelector('#new-todo-form');
 const projectSelect = document.querySelector('#project-select');
 const dueDateInput = document.querySelector('#dueDate-input');
 const todoListDiv = document.querySelector('#todo-list');
+const sidebar = document.querySelector('#side-bar');
+const projectListUL = document.querySelector('#project-list');
 
 const toggleForm = () => {
   newTodoButton.addEventListener('click', (e) => {
@@ -32,6 +34,21 @@ const setDefaultDate = () => {
   dueDateInput.setAttribute("value", tomorrow);
 }
 
+const handleFormSubmit = (e) => {
+  e.preventDefault();
+  const form = e.target;
+  const description = form["description-input"].value;
+  const dueDate = form["dueDate-input"].value;
+  const priority = parseInt(form["priority-select"].value);
+  const projectID = parseInt(form["project-select"].value);
+  const todoInfo = {
+    description, dueDate, priority, projectID
+  };
+  eventAggregator.publish("newTodoInfoSent", todoInfo);
+  form.reset();
+}
+
+// set up
 const setUpForm = () => {
   setDefaultDate();
   eventAggregator.subscribe("projectListSent", (projectList) => {
@@ -46,22 +63,13 @@ const setUpTodoList = () => {
   })
 }
 
-
-
-const handleFormSubmit = (e) => {
-  e.preventDefault();
-  const form = e.target;
-  const description = form["description-input"].value;
-  const dueDate = form["dueDate-input"].value;
-  const priority = parseInt(form["priority-select"].value);
-  const projectID = parseInt(form["project-select"].value);
-  const todoInfo = {
-  	description, dueDate, priority, projectID
-  };
-  eventAggregator.publish("newTodoInfoSent", todoInfo);
-  form.reset();
+const setUpProjectSideBar = () => {
+  eventAggregator.subscribe("projectListSent", (projectList) => {
+    populateProjectSideBar(projectList);
+  });
 }
 
+// populate
 const populateElement = (list, element, fn) => {
   element.innerHTML = "";
   list.forEach(item => {
@@ -74,10 +82,16 @@ const populateProjectSelect = (list) => {
  return populateElement(list, projectSelect, createProjectOption);
 }
 
+const populateProjectSideBar = (list) => {
+ console.log("populateProjectSidebar");
+ return populateElement(list, projectListUL, createProjectLi);
+}
+
 const populateTodoList = (list) => {
   return populateElement(list, todoListDiv, createTodoLi);
 }
 
+// create
 const createProjectOption = (project) => {
   const option = document.createElement('option');
   option.setAttribute("value", project.id);
@@ -85,6 +99,13 @@ const createProjectOption = (project) => {
   option["name"] = project.name;
   option.textContent = project.name;
   return option;
+}
+
+const createProjectLi = (project) => {
+  const li = document.createElement('li');
+  li.setAttribute('id', `project-${project.id}`)
+  li.textContent = project.name
+  return li;
 }
 
 const createTodoLi = (todo) => {
@@ -103,6 +124,7 @@ const domManipulation = (() => {
   newTodoForm.addEventListener('submit', handleFormSubmit)
   setUpForm();
   setUpTodoList();
+  setUpProjectSideBar();
   return {
     
   }

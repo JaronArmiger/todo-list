@@ -22,8 +22,8 @@ window.onload = (e) => {
 */
 projectsManager.sendProjectList();
 todosManager.sendTodoList();
-console.log(todosManager.getArray());
-console.log(eventAggregator.getArray());
+//console.log(todosManager.getArray());
+//console.log(eventAggregator.getArray());
 
 
 
