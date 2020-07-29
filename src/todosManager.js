@@ -1,5 +1,6 @@
 import { todo }            from "./todo";
 import { projectsManager } from "./projectsManager";
+import { eventAggregator } from "./eventAggregator";
 
 const todosManager = (() => {
   let todosArray = [];
@@ -17,7 +18,12 @@ const todosManager = (() => {
   const getTodoByID = (todoID) => {
   	return todosArray.find(t => t.id === todoID);
   }
-  return { createTodo, getTodoByID }
+  eventAggregator.subscribe("todoInfoSent", (infoObject) => {
+    createTodo(infoObject);
+  });
+
+  const getArray = () => todosArray;
+  return { createTodo, getTodoByID, getArray }
 })();
 
 export { todosManager }

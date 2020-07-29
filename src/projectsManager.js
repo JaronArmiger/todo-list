@@ -1,5 +1,6 @@
 import { project }         from "./project";
 import { todosManager }	   from "./todosManager";
+import { eventAggregator } from "./eventAggregator";
 
 const projectsManager = (() => {
   let projectsArray = [project({name: "default", id: 0})];
@@ -23,9 +24,14 @@ const projectsManager = (() => {
   	const theTodo = todosManager.getTodoByID(todoID);
   	theProject.addTodo(theTodo);
   }
+
+  const sendProjectList = () => {
+    eventAggregator.publish("projectInfoSent", projectsArray);
+  }
+
   const getArray = () => projectsArray;
   return { createProject, projectExists, getArray, getProjectByID,
-  		   addTodoToProject
+  		   addTodoToProject, sendProjectList
   		 }
 })();
 

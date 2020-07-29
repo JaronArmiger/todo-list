@@ -20,15 +20,10 @@ window.onload = (e) => {
   console.log("i said that")
 }
 */
-
-const testFn = (string) => {
-  console.log(string);
-}
-
+projectsManager.sendProjectList();
+console.log(todosManager.getArray());
 console.log(eventAggregator.getArray());
-eventAggregator.subscribe("newEvent", testFn);
-console.log(eventAggregator.getArray());
-eventAggregator.publish("newEvent", "fuck");
+
 
 
 

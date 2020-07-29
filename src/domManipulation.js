@@ -1,3 +1,5 @@
+import { eventAggregator } from "./eventAggregator";
+
 const newTodoButton = document.querySelector('#new-todo-btn');
 const newTodoForm = document.querySelector('#new-todo-form');
 const projectSelect = document.querySelector('#project-select');
@@ -28,12 +30,22 @@ const setDefaultDate = () => {
   dueDateInput.setAttribute("value", tomorrow);
 }
 
+const setUpForm = () => {
+  setDefaultDate();
+  eventAggregator.subscribe("projectInfoSent", (projectList) => {
+  	populateProjectSelect(projectList);
+  });
+}
+
 const handleFormSubmit = (e) => {
   e.preventDefault();
   const form = e.target;
   const description = form["description-input"].value;
   const dueDate = form["dueDate-input"].value;
-  console.log(dueDate)
+  const priority = form["priority-select"].value;
+  console.log(description);
+  console.log(dueDate);
+  console.log(priority);
 }
 
 const populateElement = (list, element, fn) => {
@@ -41,6 +53,10 @@ const populateElement = (list, element, fn) => {
   	const child = fn(item);
   	element.appendChild(child);
   })
+}
+
+const populateProjectSelect = (list) => {
+ return populateElement(list, projectSelect, createProjectOption);
 }
 
 const createProjectOption = (project) => {
@@ -56,13 +72,10 @@ const createProjectOption = (project) => {
 
 const domManipulation = (() => {
   toggleForm();
-  setDefaultDate();
   newTodoForm.addEventListener('submit', handleFormSubmit)
-  const populateProjectSelect = (list) => {
-  	return populateElement(list, projectSelect, createProjectOption);
-  }
+  setUpForm();
   return {
-    populateProjectSelect
+    
   }
 })();
 
