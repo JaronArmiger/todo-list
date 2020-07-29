@@ -1,4 +1,3 @@
-import { todosManager }	   from "./todosManager";
 import { eventAggregator } from "./eventAggregator";
 
 const project = ({name, id}) => {
