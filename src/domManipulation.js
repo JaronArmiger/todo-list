@@ -17,6 +17,13 @@ const toggleForm = () => {
   })
 }
 
+const navigateProjectsBar = () => {
+  const projectLis = projectListUL.childNodes;
+  console.log("projectLis");
+  console.log(projectLis);
+
+}
+
 const setDefaultDate = () => {
   // set default to this time tomorrow
   const now = new Date();
@@ -67,6 +74,7 @@ const setUpProjectSideBar = () => {
   eventAggregator.subscribe("projectListSent", (projectList) => {
     populateProjectSideBar(projectList);
   });
+  navigateProjectsBar();
 }
 
 // populate
