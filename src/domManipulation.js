@@ -19,9 +19,10 @@ const toggleForm = () => {
 
 const navigateProjectsBar = () => {
   const projectLis = projectListUL.childNodes;
-  console.log("projectLis");
-  console.log(projectLis);
-
+  projectLis.forEach(li => li.addEventListener('click', (e) => {
+    projectLis.forEach(subLi => subLi.classList.remove('active-project'));
+    e.target.classList.add('active-project');
+  }));
 }
 
 const setDefaultDate = () => {
@@ -30,7 +31,6 @@ const setDefaultDate = () => {
   let year = now.getFullYear();
   let month = now.getMonth() + 1;
   let day = now.getDate() + 1;
-  console.log(day)
   if ((day / 10) < 1) {
   	day = "0" + day;
   }
@@ -65,7 +65,6 @@ const setUpForm = () => {
 
 const setUpTodoList = () => {
   eventAggregator.subscribe("todoListSent", (todoList) => {
-  	console.log("setUpTodoList");
   	populateTodoList(todoList);
   })
 }
@@ -73,8 +72,8 @@ const setUpTodoList = () => {
 const setUpProjectSideBar = () => {
   eventAggregator.subscribe("projectListSent", (projectList) => {
     populateProjectSideBar(projectList);
+    navigateProjectsBar();
   });
-  navigateProjectsBar();
 }
 
 // populate
@@ -91,7 +90,6 @@ const populateProjectSelect = (list) => {
 }
 
 const populateProjectSideBar = (list) => {
- console.log("populateProjectSidebar");
  return populateElement(list, projectListUL, createProjectLi);
 }
 

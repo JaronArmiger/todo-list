@@ -10,6 +10,8 @@ todosManager.createTodo({description: "taco tuesday",
 						 dueDate: "5/3/21"});
 
 projectsManager.createProject("bread");
+projectsManager.createProject("dumb off a bean");
+projectsManager.createProject("gum gum");
 /*
 const defaultProject = projectsManager.getProjectByID(0);
 const projectsArray = projectsManager.getArray();
