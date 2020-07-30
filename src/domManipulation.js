@@ -19,9 +19,15 @@ const toggleForm = () => {
 
 const navigateProjectsBar = () => {
   const projectLis = projectListUL.childNodes;
+  let firstCall = true;
+  if (firstCall === true) {
+    // on page load, default project should be set as active
+    projectLis.item(0).classList.add('active-project');
+  }
   projectLis.forEach(li => li.addEventListener('click', (e) => {
     projectLis.forEach(subLi => subLi.classList.remove('active-project'));
     e.target.classList.add('active-project');
+    firstCall = false;
   }));
 }
 
@@ -110,7 +116,8 @@ const createProjectOption = (project) => {
 const createProjectLi = (project) => {
   const li = document.createElement('li');
   li.setAttribute('id', `project-${project.id}`);
-  li.setAttribute('class', 'project-li')
+  li.setAttribute('class', 'project-li');
+  li.setAttribute('data-index', project.id);
   li.textContent = project.name;
   return li;
 }

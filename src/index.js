@@ -22,7 +22,7 @@ window.onload = (e) => {
   console.log("i said that")
 }
 */
-projectsManager.sendProjectList();
+
 todosManager.sendTodoList();
 //console.log(todosManager.getArray());
 //console.log(eventAggregator.getArray());

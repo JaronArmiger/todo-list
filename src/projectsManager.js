@@ -20,6 +20,7 @@ const projectsManager = (() => {
   	if (newProject) {
   	  projectsCounter++;
   	  projectsArray.push(newProject);
+      sendProjectList();
   	  return newProject;
   	}
   }
