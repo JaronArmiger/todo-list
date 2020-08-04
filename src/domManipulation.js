@@ -4,7 +4,7 @@ const newTodoButton = document.querySelector('#new-todo-btn');
 const newTodoForm = document.querySelector('#new-todo-form');
 const projectSelect = document.querySelector('#project-select');
 const dueDateInput = document.querySelector('#dueDate-input');
-const todoListDiv = document.querySelector('#todo-list');
+const todoListUL = document.querySelector('#todo-list');
 const sidebar = document.querySelector('#side-bar');
 const projectListUL = document.querySelector('#project-list');
 
@@ -113,7 +113,7 @@ const populateProjectSideBar = (list) => {
 }
 
 const populateTodoList = (list) => {
-  return populateElement(list, todoListDiv, createTodoLi);
+  return populateElement(list, todoListUL, createTodoLi);
 }
 
 // create
@@ -137,11 +137,15 @@ const createProjectLi = (project) => {
 
 const createTodoLi = (todo) => {
   const li = document.createElement('li');
+  li.setAttribute("class", "todo-li")
   li.innerHTML = `
-  				   <span>${todo.description}</span>
-  				   <span>${todo.projectID}</span>
-  				   <span>${todo.dueDate}</span>
-  				   <span>${todo.priority}</span>
+      <p>
+      ${todo.description}
+      </p>
+      <p>
+      ${todo.dueDate}
+      ${todo.priority}
+      </p>
   				 `		
   return li;
 }

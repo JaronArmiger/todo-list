@@ -14,6 +14,8 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  max-width: 100rem;
+  margin: auto;
 }
 
 h1 {
@@ -146,3 +148,33 @@ input[type="submit"] {
 .hide > * {
   display: none;
 }
+
+#todo-list {
+  display: flex;
+  flex-direction: column;
+  flex-basis: 100%;
+}
+
+.todo-li {
+  border: 1rem solid var(--main-bg-color);
+  margin: 1rem 0;
+  padding: 1rem;
+  border-radius: 1rem;
+  min-width: 40rem;
+}
+
+.todo-li > * {
+  font-size: 1.5rem;
+}
+
+
+
+
+
+
+
+
+
+
+
+
