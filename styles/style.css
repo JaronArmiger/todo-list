@@ -190,7 +190,7 @@ input[type="submit"] {
   background-color: var(--main-bg-color);
 }
 
-.clicked {
+.checked {
   background-color: var(--main-darker);
 }
 

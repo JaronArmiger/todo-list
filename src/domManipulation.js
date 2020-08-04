@@ -78,6 +78,7 @@ const handleFormSubmit = (e) => {
 const handleCheck = (e) => {
   const todoID = parseInt(e.target.dataset.index);
   eventAggregator.publish("changeTodoCompletion", todoID);
+  renderProjectView(parseInt(e.target.dataset.project));
 }
 
 // set up
@@ -158,10 +159,12 @@ const createProjectLi = (project) => {
 
 const createTodoLi = (todo) => {
   const li = document.createElement('li');
-  li.setAttribute("class", "todo-li")
+  li.setAttribute("class", "todo-li");
+  const checked = (todo.completed ? "checked" : "");
   li.innerHTML = `
       <div>
-        <button data-index="${todo.id}" class="check-btn"></button>
+        <button data-index="${todo.id}" class="check-btn ${checked}" data-project=${todo.projectID}>
+        </button>
       </div>
       <div>
         <p>
@@ -174,6 +177,9 @@ const createTodoLi = (todo) => {
         </p>
       </div>
   				 `
+  if (todo.completed) {
+    li.classList.add("checked");
+  }
   return li;
 }
 
