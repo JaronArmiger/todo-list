@@ -5,6 +5,8 @@ const newTodoForm = document.querySelector('#new-todo-form');
 const projectSelect = document.querySelector('#project-select');
 const dueDateInput = document.querySelector('#dueDate-input');
 const todoListUL = document.querySelector('#todo-list');
+const incompletedUL = document.querySelector('#incompleted');
+const completedUL = document.querySelector('#completed');
 const sidebar = document.querySelector('#side-bar');
 const projectListUL = document.querySelector('#project-list');
 
@@ -83,8 +85,13 @@ const setUpForm = () => {
 
 const setUpTodoList = () => {
   eventAggregator.subscribe("todoListSent", (todoList) => {
-  	
-    populateTodoList(todoList);
+  	console.log(todoList);
+    const completed = todoList.filter(todo => todo.completed === true);
+    console.log(completed);
+    const incompleted = todoList.filter(todo => todo.completed === false);
+    console.log(incompleted);
+    populateTodoList(completed, true);
+    populateTodoList(incompleted, false);
   })
 }
 
@@ -112,9 +119,15 @@ const populateProjectSideBar = (list) => {
  return populateElement(list, projectListUL, createProjectLi);
 }
 
-const populateTodoList = (list) => {
-  return populateElement(list, todoListUL, createTodoLi);
+const populateTodoList = (list,completed) => {
+  if (completed === true) {
+    return populateElement(list, completedUL, createTodoLi);
+  } else {
+    return populateElement(list, incompletedUL, createTodoLi);
+  }
+  
 }
+
 
 // create
 const createProjectOption = (project) => {
@@ -141,10 +154,11 @@ const createTodoLi = (todo) => {
   li.innerHTML = `
       <p>
       ${todo.description}
+      ${todo.completed}
       </p>
       <p>
-      ${todo.dueDate}
-      ${todo.priority}
+        due: ${todo.dueDate}
+        priority: ${todo.priority}
       </p>
   				 `		
   return li;
