@@ -28,12 +28,15 @@ const todosManager = (() => {
 
   eventAggregator.subscribe("newTodoInfoSent", (todoInfo) => {
     createTodo(todoInfo);
-     console.log("post-creation");
-     console.log(todosArray);
   });
 
-  const sendTodoList = () => {
-    eventAggregator.publish("todoListSent", todosArray);
+  eventAggregator.subscribe("projectIDSent", (projectID) => {
+    sendTodoList(projectID);
+  });
+
+  const sendTodoList = (projectID) => {
+    const filtered = todosArray.filter(todo => todo.projectID === projectID);
+    eventAggregator.publish("todoListSent", filtered);
   }
 
   const getArray = () => todosArray;

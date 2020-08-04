@@ -7,7 +7,18 @@ import { projectsManager } from "./projectsManager";
 import { eventAggregator } from "./eventAggregator";
 
 todosManager.createTodo({description: "taco tuesday",
-						 dueDate: "5/3/21"});
+						 dueDate: "6/3/21"});
+todosManager.createTodo({description: "jewelry below",
+						 dueDate: "7/3/21",
+						 projectID: 1});
+todosManager.createTodo({description: "bust down",
+						 dueDate: "8/3/21"});
+todosManager.createTodo({description: "hey bally",
+						 dueDate: "2/3/21"});
+todosManager.createTodo({description: "get money",
+						 dueDate: "3/3/21",
+						 projectID: 2
+						});
 
 projectsManager.createProject("bread");
 projectsManager.createProject("dumb off a bean");
@@ -23,7 +34,9 @@ window.onload = (e) => {
 }
 */
 
-todosManager.sendTodoList();
+//todosManager.sendTodoList();
+console.log("ay")
+console.log(todosManager.getArray()[0].projectID);
 //console.log(todosManager.getArray());
 //console.log(eventAggregator.getArray());
 

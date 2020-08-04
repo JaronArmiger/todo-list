@@ -17,18 +17,28 @@ const toggleForm = () => {
   })
 }
 
-const navigateProjectsBar = () => {
+const renderProjectView = (projectID) => {
+  eventAggregator.publish("projectIDSent", projectID);
+}
+
+const navigateProjectsBar = (choice = 0) => {
   const projectLis = projectListUL.childNodes;
   let firstCall = true;
+  
+  projectLis.forEach(li => {
+    li.classList.remove('active-project');
+    li.addEventListener('click', (e) => {
+      projectLis.forEach(subLi => subLi.classList.remove('active-project'));
+        e.target.classList.add('active-project');
+        renderProjectView(parseInt(e.target.dataset.index));
+        firstCall = false;
+    }
+  )});
   if (firstCall === true) {
     // on page load, default project should be set as active
-    projectLis.item(0).classList.add('active-project');
+    projectLis.item(choice).classList.add('active-project');
+    renderProjectView(choice);
   }
-  projectLis.forEach(li => li.addEventListener('click', (e) => {
-    projectLis.forEach(subLi => subLi.classList.remove('active-project'));
-    e.target.classList.add('active-project');
-    firstCall = false;
-  }));
 }
 
 const setDefaultDate = () => {
@@ -59,6 +69,8 @@ const handleFormSubmit = (e) => {
   };
   eventAggregator.publish("newTodoInfoSent", todoInfo);
   form.reset();
+  renderProjectView(parseInt(projectID));
+  navigateProjectsBar(parseInt(projectID));
 }
 
 // set up
@@ -71,7 +83,8 @@ const setUpForm = () => {
 
 const setUpTodoList = () => {
   eventAggregator.subscribe("todoListSent", (todoList) => {
-  	populateTodoList(todoList);
+  	
+    populateTodoList(todoList);
   })
 }
 
