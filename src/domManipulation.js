@@ -75,6 +75,11 @@ const handleFormSubmit = (e) => {
   navigateProjectsBar(parseInt(projectID));
 }
 
+const handleCheck = (e) => {
+  const todoID = parseInt(e.target.dataset.index);
+  eventAggregator.publish("changeTodoCompletion", todoID);
+}
+
 // set up
 const setUpForm = () => {
   setDefaultDate();
@@ -85,14 +90,14 @@ const setUpForm = () => {
 
 const setUpTodoList = () => {
   eventAggregator.subscribe("todoListSent", (todoList) => {
-  	console.log(todoList);
     const completed = todoList.filter(todo => todo.completed === true);
-    console.log(completed);
     const incompleted = todoList.filter(todo => todo.completed === false);
-    console.log(incompleted);
     populateTodoList(completed, true);
     populateTodoList(incompleted, false);
-  })
+    const checkButtons = document.querySelectorAll('.check-btn');
+    checkButtons.forEach(btn => btn.addEventListener('click', handleCheck));
+  });
+
 }
 
 const setUpProjectSideBar = () => {
@@ -108,7 +113,10 @@ const populateElement = (list, element, fn) => {
   list.forEach(item => {
   	const child = fn(item);
   	element.appendChild(child);
-  })
+  });
+  if (list.length === 0) {
+    element.innerHTML = "<p>nothing here yet ;)</p>"
+  }
 }
 
 const populateProjectSelect = (list) => {
@@ -152,15 +160,20 @@ const createTodoLi = (todo) => {
   const li = document.createElement('li');
   li.setAttribute("class", "todo-li")
   li.innerHTML = `
-      <p>
-      ${todo.description}
-      ${todo.completed}
-      </p>
-      <p>
-        due: ${todo.dueDate}
-        priority: ${todo.priority}
-      </p>
-  				 `		
+      <div>
+        <button data-index="${todo.id}" class="check-btn"></button>
+      </div>
+      <div>
+        <p>
+          ${todo.description}
+          ${todo.completed}
+        </p>
+        <p>
+          due: ${todo.dueDate}
+          priority: ${todo.priority}
+        </p>
+      </div>
+  				 `
   return li;
 }
 

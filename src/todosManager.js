@@ -34,12 +34,27 @@ const todosManager = (() => {
     sendTodoList(projectID);
   });
 
+  eventAggregator.subscribe("changeTodoCompletion", (todoID) => {
+    toggleCompleted(todoID);
+  });
+
   const sendTodoList = (projectID) => {
     const filtered = todosArray.filter(todo => todo.projectID === projectID);
     eventAggregator.publish("todoListSent", filtered);
   }
 
   const getArray = () => todosArray;
+
+  const toggleCompleted = (todoID) => {
+    const todo = getTodoByID(todoID);
+    if (todo.completed === true) {
+      todo.completed = false;
+    } else if (todo.completed === false) {
+      todo.completed = true;
+    }
+    console.log(todo);
+  }
+
   return { createTodo, getTodoByID, getArray, sendTodoList }
 })();
 
