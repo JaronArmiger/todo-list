@@ -80,8 +80,13 @@ const handleProjectFormSubmit = function(e) {
   e.preventDefault();
   const form = this;
   const projectName = form["project-name"].value;
+  eventAggregator.subscribe("receiveProjectID", (projectID) => {
+    console.log("received");
+    navigateProjectsBar(projectID);
+  });
   eventAggregator.publish("newProject", projectName);
   form.reset();
+  
 }
 
 const handleCheck = (e) => {

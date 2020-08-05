@@ -26,10 +26,15 @@ const projectsManager = (() => {
   const sendProjectList = () => {
     eventAggregator.publish("projectListSent", projectsArray);
   }
+  
+  const sendProjectID = (projectID) => {
+    eventAggregator.publish("receiveProjectID", projectID);
+  }
 
   eventAggregator.subscribe("newProject", (projectName) => {
-    createProject(projectName);
+    const newProject = createProject(projectName);
     sendProjectList();
+    sendProjectID(newProject.id);
   });
 
   const getArray = () => projectsArray;
