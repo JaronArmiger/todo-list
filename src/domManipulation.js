@@ -184,6 +184,7 @@ const createTodoLi = (todo) => {
         <p>
           ${todo.description}
           ${todo.completed}
+          ${todo.projectID}
         </p>
         <p>
           due: ${todo.dueDate}

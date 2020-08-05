@@ -5,7 +5,7 @@ const todo = ({description, dueDate, priority, id, projectID}) => ({
 });
 
 const todosManager = (() => {
-  let todosArray = [];
+  let todosArray = JSON.parse(localStorage.getItem('todos')) || [];
   let todosCounter = 0;
   const createTodo = ({description,dueDate,priority=5,projectID=0}) => {
   	const newTodo = todo({description,dueDate,
@@ -16,6 +16,7 @@ const todosManager = (() => {
   	  todosArray.push(newTodo);
   	  eventAggregator.publish("todoSent", newTodo);
       sendTodoList();
+      localStorage.setItem('todos', JSON.stringify(todosArray));
   	  return newTodo;
   	} else {
       console.log("failed to create");
@@ -52,7 +53,7 @@ const todosManager = (() => {
     } else if (todo.completed === false) {
       todo.completed = true;
     }
-    console.log(todo);
+    localStorage.setItem('todos', JSON.stringify(todosArray));
   }
 
   return { createTodo, getTodoByID, getArray, sendTodoList }
