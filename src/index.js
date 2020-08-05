@@ -1,4 +1,5 @@
 import "../styles/style.css";
+import img from "../dist/images/monkey.jpg";
 //import { todo }            from "./todo";
 //import { project }         from "./project";
 import { domManipulation } from "./domManipulation";

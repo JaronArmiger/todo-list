@@ -9,6 +9,13 @@
   box-sizing: border-box;
 }
 
+body {
+  background-image: url('../dist/images/monkey.jpg');
+  background-repeat: no-repeat;
+  background-position: center -120px;
+  background-size: cover;
+}
+
 .container {
   display: flex;
   flex-direction: column;
@@ -16,6 +23,7 @@
   align-items: center;
   max-width: 100rem;
   margin: auto;
+
 }
 
 h1 {
@@ -192,7 +200,7 @@ input[type="submit"] {
 }
 
 .checked {
-  background-color: var(--main-darker);
+  background-color: var(--main-bg-color);
 }
 
 #new-project-form {
@@ -207,7 +215,6 @@ input[type="submit"] {
   border: 0;
   border-radius: .5rem;
 }
-
 
 
 
