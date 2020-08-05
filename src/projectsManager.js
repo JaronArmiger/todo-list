@@ -5,8 +5,8 @@ const project = ({name, id}) => {
 }
 
 const projectsManager = (() => {
-  let projectsArray = [project({name: "default", id: 0})];
-  let projectsCounter = 1;
+  let projectsArray = [];
+  let projectsCounter = 0;
   const createProject = (name) => {
   	let newProject = project({name, id: projectsCounter});
   	if (newProject) {
