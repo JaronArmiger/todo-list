@@ -70,6 +70,7 @@ const handleTodoFormSubmit = (e) => {
   const todoInfo = {
     description, dueDate, priority, projectID
   };
+  console.log(todoInfo);
   eventAggregator.publish("newTodoInfoSent", todoInfo);
   form.reset();
   renderProjectView(parseInt(projectID));

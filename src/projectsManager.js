@@ -6,7 +6,7 @@ const project = ({name, id}) => {
 
 const projectsManager = (() => {
   let projectsArray = JSON.parse(localStorage.getItem('projects')) || [];
-  let projectsCounter = 0;
+  let projectsCounter = parseInt(localStorage.getItem('projectsCounter')) || 0;
   const createProject = (name) => {
   	let newProject = project({name, id: projectsCounter});
   	if (newProject) {
@@ -14,6 +14,8 @@ const projectsManager = (() => {
   	  projectsArray.push(newProject);
       sendProjectList();
       localStorage.setItem('projects', JSON.stringify(projectsArray));
+      localStorage.setItem('projectsCounter', projectsCounter);
+      console.log(newProject);
   	  return newProject;
   	}
   }

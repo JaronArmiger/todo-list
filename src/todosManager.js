@@ -6,7 +6,7 @@ const todo = ({description, dueDate, priority, id, projectID}) => ({
 
 const todosManager = (() => {
   let todosArray = JSON.parse(localStorage.getItem('todos')) || [];
-  let todosCounter = 0;
+  let todosCounter = parseInt(localStorage.getItem('todosCounter')) || 0;
   const createTodo = ({description,dueDate,priority=5,projectID=0}) => {
   	const newTodo = todo({description,dueDate,
   							          priority,id: todosCounter,
@@ -17,6 +17,8 @@ const todosManager = (() => {
   	  eventAggregator.publish("todoSent", newTodo);
       sendTodoList();
       localStorage.setItem('todos', JSON.stringify(todosArray));
+      localStorage.setItem('todosCounter', todosCounter);
+      console.log(newTodo);
   	  return newTodo;
   	} else {
       console.log("failed to create");
