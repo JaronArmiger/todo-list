@@ -2,6 +2,7 @@ import { eventAggregator } from "./eventAggregator";
 
 const newTodoButton = document.querySelector('#new-todo-btn');
 const newTodoForm = document.querySelector('#new-todo-form');
+const newProjectForm = document.querySelector('#new-project-form');
 const projectSelect = document.querySelector('#project-select');
 const dueDateInput = document.querySelector('#dueDate-input');
 const todoListUL = document.querySelector('#todo-list');
@@ -59,7 +60,7 @@ const setDefaultDate = () => {
   dueDateInput.setAttribute("value", tomorrow);
 }
 
-const handleFormSubmit = (e) => {
+const handleTodoFormSubmit = (e) => {
   e.preventDefault();
   const form = e.target;
   const description = form["description-input"].value;
@@ -73,6 +74,14 @@ const handleFormSubmit = (e) => {
   form.reset();
   renderProjectView(parseInt(projectID));
   navigateProjectsBar(parseInt(projectID));
+}
+
+const handleProjectFormSubmit = function(e) {
+  e.preventDefault();
+  const form = this;
+  const projectName = form["project-name"].value;
+  eventAggregator.publish("newProject", projectName);
+  form.reset();
 }
 
 const handleCheck = (e) => {
@@ -185,7 +194,8 @@ const createTodoLi = (todo) => {
 
 const domManipulation = (() => {
   toggleForm();
-  newTodoForm.addEventListener('submit', handleFormSubmit)
+  newTodoForm.addEventListener('submit', handleTodoFormSubmit);
+  newProjectForm.addEventListener('submit', handleProjectFormSubmit);
   setUpForm();
   setUpTodoList();
   setUpProjectSideBar();

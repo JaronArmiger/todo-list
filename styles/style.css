@@ -194,7 +194,18 @@ input[type="submit"] {
   background-color: var(--main-darker);
 }
 
+#new-project-form {
+  padding: 0;
+  background-color: rgba(0,0,0,0);
+}
 
+#new-project-form input[type=text] {
+  width: 19rem;
+  padding: 1rem;
+  outline: 0;
+  border: 0;
+  border-radius: .5rem;
+}
 
 
 

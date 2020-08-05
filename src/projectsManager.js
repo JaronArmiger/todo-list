@@ -22,20 +22,19 @@ const projectsManager = (() => {
   const getProjectByID = (projectID) => {
   	return projectsArray.find(p => p.id === projectID);
   }
-  const addTodoToProject = (projectID, todoID) => {
-  	const theProject = getProjectByID(projectID) || createProject(`project-${projectsCounter}`);
-    eventAggregator.subscribe("todoSent", (todoObject) => {
-      theProject.addTodo(todoObject);
-    })
-  }
 
   const sendProjectList = () => {
     eventAggregator.publish("projectListSent", projectsArray);
   }
 
+  eventAggregator.subscribe("newProject", (projectName) => {
+    createProject(projectName);
+    sendProjectList();
+  });
+
   const getArray = () => projectsArray;
   return { createProject, projectExists, getArray, getProjectByID,
-  		   addTodoToProject, sendProjectList
+  		    sendProjectList
   		 }
 })();
 
